@@ -1,37 +1,26 @@
 import React, { Component, PropTypes } from 'react'
 import Modal from 'react-modal'
+import toggleOpen from './HOC/toggleOpen'
 
 class Container extends Component {
-
-    state = {
-        isOpen: false
-    }
-
-    openModal = () => {
-        this.setState({
-            isOpen: true
-        })
-    }
-
-    closeModal = () => {
-        this.setState({
-            isOpen: false
-        })
-    }
+    static propTypes = {
+        isOpen: PropTypes.bool,
+        closeModal: PropTypes.func,
+        openModal: PropTypes.func
+    };
 
     render() {
+        const { isOpen, closeModal, openModal } = this.props
         return (
             <div>
-                <a onClick = {this.openModal}
-                   onRequestClose = {this.closeModal}
-                >Open modal</a>
-                <Modal isOpen={this.state.isOpen}>
+                <a onClick = {openModal} onRequestClose = {closeModal}>Open modal</a>
+                <Modal isOpen={isOpen}>
                     <h1>Hello world</h1>
-                    <a onClick={this.closeModal}>close</a>
+                    <a onClick={closeModal}>close</a>
                 </Modal>
             </div>
         )
     }
 }
 
-export default Container
+export default toggleOpen(Container)
