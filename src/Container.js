@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import Modal from 'react-modal'
 import toggleOpen from './HOC/toggleOpen'
+import CSSTransition from 'react-addons-css-transition-group'
+
+require('./animation.css')
 
 class Container extends Component {
     static propTypes = {
@@ -26,7 +29,9 @@ class Container extends Component {
                     <a onClick={closeModal}>close</a>
                 </Modal>
                 <ul>
-                    {items}
+                    <CSSTransition transitionName="animation" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                        {items}
+                    </CSSTransition>
                 </ul>
                 <a onClick = {this.addItem}>add item</a>
             </div>
